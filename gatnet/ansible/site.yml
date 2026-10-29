@@ -1,0 +1,11 @@
+---
+- name: Example Gatnet host preparation (optional)
+  hosts: gatnet
+  become: true
+  tasks:
+    - name: Install Node.js 20 and unzip on Amazon Linux 2023
+      ansible.builtin.dnf:
+        name:
+          - nodejs20
+          - unzip
+        state: present

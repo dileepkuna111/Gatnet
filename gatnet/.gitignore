@@ -1,0 +1,9 @@
+node_modules/
+.env
+*.log
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/gatnet-app.zip
+terraform/tfplan
+.DS_Store

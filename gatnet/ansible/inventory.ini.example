@@ -1,0 +1,4 @@
+# Optional: use this only if you separately create/manage a reachable EC2 host.
+# The Terraform demo deployment does not require Ansible.
+[gatnet]
+203.0.113.10 ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/your-key.pem

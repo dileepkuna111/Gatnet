@@ -1,0 +1,40 @@
+pipeline {
+  agent any
+  options { timestamps(); disableConcurrentBuilds() }
+  environment {
+    APP_DIR = 'app'
+    IMAGE_NAME = 'gatnet'
+  }
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+    stage('Install dependencies') {
+      steps {
+        dir("${APP_DIR}") {
+          sh 'node --version'
+          sh 'npm install'
+        }
+      }
+    }
+    stage('Test') {
+      steps { dir("${APP_DIR}") { sh 'npm test' } }
+    }
+    stage('Dependency and code checks') {
+      steps {
+        sh 'echo "Add SonarQube Scanner and Nexus upload credentials/configuration here."'
+      }
+    }
+    stage('Build container') {
+      steps { sh 'docker build -t gatnet:${BUILD_NUMBER} app' }
+    }
+    stage('Publish') {
+      steps {
+        sh 'echo "Configure a secured registry/Nexus Docker repository, login using Jenkins credentials, then push the image."'
+      }
+    }
+  }
+  post {
+    always { echo 'Gatnet pipeline finished. Review stage results before deployment.' }
+  }
+}
